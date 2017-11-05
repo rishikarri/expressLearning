@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var apiController = require('./controllers/apiController');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -23,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/users', users); //within path routes are processed 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,5 +43,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.post('/person', urlencodedParser, function(req, res) {
+	res.send('Thank You');
+	console.log(req.body.firstname);
+	console.log(req.body.lastname);
+})
+
+
+apiController(app); // app controller adds takes app and adds in teh gets posts and deltes to it
 
 module.exports = app;

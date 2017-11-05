@@ -4,6 +4,8 @@
  * Module dependencies.
  */
 
+// set up server here
+// app.js sets up main pieces of the application
 var app = require('../app');
 var debug = require('debug')('myexpressapp:server');
 var http = require('http');
